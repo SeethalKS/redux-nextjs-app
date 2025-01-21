@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Product } from '../../../models/product';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Product } from "../../../models/product";
 
 export interface ProductsState {
   newProducts: Product[];
@@ -14,13 +14,16 @@ const initialState: ProductsState = {
   inProgress: false,
 };
 
-export const fetchNewProducts = createAsyncThunk('products/fetchNewProducts', async () => {
-  const response = await fetch('https://fakestoreapi.com/products');
-  return response.json();
-});
+export const fetchNewProducts = createAsyncThunk(
+  "products/fetchNewProducts",
+  async () => {
+    const response = await fetch("https://fakestoreapi.com/products");
+    return response.json();
+  }
+);
 
 export const productSlice = createSlice({
-  name: 'products',
+  name: "products",
   initialState,
   reducers: {
     setOfferProducts: (state, action) => {

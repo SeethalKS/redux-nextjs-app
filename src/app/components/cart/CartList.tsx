@@ -1,21 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../GlobalRedux/store';
-import { removeFromCart, clearCart } from '../../GlobalRedux/Features/cart/cart-slice';
-
-import { useRouter } from 'next/router'; // Import useRouter
-
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../GlobalRedux/store";
+import {
+  removeFromCart,
+  clearCart,
+} from "../../GlobalRedux/Features/cart/cart-slice";
 
 export default function Cart() {
-
-//     const router = useRouter();
-//     const [isClient, setIsClient] = useState(false); 
-//     // Set `isClient` to true when component is mounted on the client
-//   useEffect(() => {
-//     setIsClient(true);
-//   }, []);
-
-  const cartItems = useSelector((state: RootState) => state.Cart.items);  // Corrected selector
+  const cartItems = useSelector((state: RootState) => state.Cart.items); // Corrected selector
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (id: number) => {
@@ -26,15 +18,14 @@ export default function Cart() {
     dispatch(clearCart());
   };
 
-  // Ensure cartItems is defined and is an array
   if (!Array.isArray(cartItems)) {
     return <p>Error: Cart data is not an array.</p>;
   }
 
-  // Calculate total price safely
+  // Calculate total price
   const totalPrice = cartItems.reduce((total, item) => {
-    const itemPrice = item.price || 0;  // Default to 0 if price is undefined
-    const itemQty = item.qty || 0;  // Default to 0 if qty is undefined
+    const itemPrice = item.price || 0;
+    const itemQty = item.qty || 0;
     return total + itemPrice * itemQty;
   }, 0);
 
@@ -47,27 +38,36 @@ export default function Cart() {
         <div>
           <ul className="list-group mb-4">
             {cartItems.map((item) => (
-              <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
+              <li
+                key={item.id}
+                className="list-group-item d-flex justify-content-between align-items-center"
+              >
                 <div>
-                  <img src={item.image} alt={item.title} height={50} width={50} className="me-3" />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    height={50}
+                    width={50}
+                    className="me-3"
+                  />
                   <strong>{item.title}</strong>
                   <p className="mb-0">Quantity: {item.qty}</p>
                   {item.price && <p className="mb-0">Price: ₹{item.price}</p>}
                 </div>
-                <button className="btn btn-danger" onClick={() => handleRemoveFromCart(item.id)}>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleRemoveFromCart(item.id)}
+                >
                   Remove
                 </button>
               </li>
             ))}
           </ul>
           <div className="text-center">
-            <h4>Total Price: ₹{totalPrice.toFixed(2)}</h4> {/* Use toFixed to show 2 decimal places */}
+            <h4>Total Price: ₹{totalPrice.toFixed(2)}</h4>
             <button className="btn btn-warning" onClick={handleClearCart}>
               Clear Cart
             </button>
-            {/* <div className="text-center mt-4">
-        <button className="btn btn-primary" onClick={() => router.back()}>Back</button>
-      </div> */}
           </div>
         </div>
       )}

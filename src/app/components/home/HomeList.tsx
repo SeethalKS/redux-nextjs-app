@@ -1,18 +1,17 @@
-import Link from 'next/link';
-import { RootState } from '../../GlobalRedux/store';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { width } from '@fortawesome/free-brands-svg-icons/fa42Group';
+import Link from "next/link";
+import { RootState } from "../../GlobalRedux/store";
+import React from "react";
+import { useSelector } from "react-redux";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 export default function Home() {
   const newimages = useSelector((state: RootState) => state.home.newImages);
   const isLoading = useSelector((state: RootState) => state.home.inProgress);
 
   return (
-    <div style={{width:'350px'}}>
-      {/* <h3>Home</h3> */}
+    <div style={{ width: "350px" }}>
       {isLoading && <h5>Loading... Please wait...</h5>}
       {newimages && (
         <div id="carouselExampleIndicators" className="carousel slide colrs">
@@ -36,16 +35,15 @@ export default function Home() {
             {newimages.map((p, index) => (
               <div
                 key={index}
-                className={`carousel-item ${index === 0 ? "active" : ""}`}  style={{marginLeft:'50px'}}
+                className={`carousel-item ${index === 0 ? "active" : ""}`}
+                style={{ marginLeft: "50px" }}
               >
                 <img
                   src={p.image}
                   className="d-block w-180"
-                 
                   height={300}
                   width={300}
-
-                  style={{alignItems:'center'}}
+                  style={{ alignItems: "center" }}
                 />
               </div>
             ))}
@@ -79,9 +77,9 @@ export default function Home() {
         </div>
       )}
 
-      <div className="setalign" style={{marginLeft:'60px'}}>
+      <div className="setalign" style={{ marginLeft: "60px" }}>
         <Link href="../../products" legacyBehavior>
-          <a className="navlink" style={{textDecoration:'none'}}>
+          <a className="navlink" style={{ textDecoration: "none" }}>
             <h4>Shop Now</h4>
           </a>
         </Link>

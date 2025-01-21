@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Home } from '../../../models/home';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Home } from "../../../models/home";
 
 export interface HomeState {
   newImages: Home[];
@@ -14,16 +14,16 @@ const initialState: HomeState = {
   inProgress: false,
 };
 
-export const fetchimages = createAsyncThunk('home/fetchImages', async () => {
-  const response = await fetch('https://fakestoreapi.com/products');
+export const fetchimages = createAsyncThunk("home/fetchImages", async () => {
+  const response = await fetch("https://fakestoreapi.com/products");
   if (!response.ok) {
-    throw new Error('Failed to fetch images');
+    throw new Error("Failed to fetch images");
   }
   return response.json();
 });
 
 export const homeSlice = createSlice({
-  name: 'home',
+  name: "home",
   initialState,
   reducers: {
     setImages: (state, action) => {
